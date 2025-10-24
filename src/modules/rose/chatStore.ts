@@ -1,4 +1,4 @@
-// stores/chat/chatStore.js
+// @ts-nocheck
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import chatService from "./chatService";

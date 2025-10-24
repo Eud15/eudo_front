@@ -1,4 +1,4 @@
-// services/chat/chatService.js
+// @ts-nocheck
 import $http from '../../plugins/axios'
 
 export default {

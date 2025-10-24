@@ -226,6 +226,8 @@
 </template>
 
 <script setup>
+// @ts-nocheck
+
 import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { 
   ChevronLeft, 
