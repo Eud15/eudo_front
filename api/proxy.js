@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // Autoriser le CORS (important si ton frontend appelle ce proxy)
+  // Autorisations du  CORS (important si ton frontend appelle ce proxy)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
