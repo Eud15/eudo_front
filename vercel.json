@@ -1,8 +1,27 @@
 {
-    "rewrites": [
-         {
-      "source": "/api/v1/:path*",
-      "destination": "http://31.97.53.56:8050/api/v1/:path*"
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://31.97.53.56:8050/api/:path*"
     }
-    ]
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
 }
