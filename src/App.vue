@@ -20,7 +20,7 @@
 
     // meta
     // useMeta({ title: 'WTM Abomey-Calavi' });
-    useMeta({ title: 'Be Proud & Shine' });
+    useMeta({ title: 'Rose Bot' });
 
     const mainLayout = computed(() => {
         return store.mainLayout === 'auth' ? authLayout : appLayout;
