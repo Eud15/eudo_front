@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Configuration de base
 const $http = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://31.97.53.56:8050',
+  baseURL: '/api/',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',

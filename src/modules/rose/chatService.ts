@@ -7,14 +7,14 @@ export default {
      * @param {Object} data - { message, session_id, conversation_id? }
      */
     sendMessage(data) {
-        return $http.post('/api/v1/chat/send_message/', data)
+        return $http.post('v1/chat/send_message/', data)
     },
 
     /**
      * Récupérer les réponses rapides disponibles
      */
     getQuickReplies() {
-        return $http.get('/api/v1/chat/quick_replies/')
+        return $http.get('v1/chat/quick_replies/')
     },
 
     /**
@@ -22,7 +22,7 @@ export default {
      * @param {Object} params - { session_id?, page?, page_size? }
      */
     getConversations(params = {}) {
-        return $http.get('/api/v1/conversations/', { params })
+        return $http.get('v1/conversations/', { params })
     },
 
     /**
@@ -30,7 +30,7 @@ export default {
      * @param {number} id - ID de la conversation
      */
     getConversationById(id) {
-        return $http.get(`/api/v1/conversations/${id}/`)
+        return $http.get(`v1/conversations/${id}/`)
     },
 
     /**
@@ -38,7 +38,7 @@ export default {
      * @param {Object} data - { session_id, title? }
      */
     createConversation(data) {
-        return $http.post('/api/v1/conversations/', data)
+        return $http.post('v1/conversations/', data)
     },
 
     /**
@@ -46,7 +46,7 @@ export default {
      * @param {number} id - ID de la conversation
      */
     deleteConversation(id) {
-        return $http.delete(`/api/v1/conversations/${id}/`)
+        return $http.delete(`v1/conversations/${id}/`)
     },
 
     /**
@@ -54,7 +54,7 @@ export default {
      * @param {Object} data - { message_id, rating, comment? }
      */
     submitFeedback(data) {
-        return $http.post('/api/v1/feedback/', data)
+        return $http.post('v1/feedback/', data)
     },
 
     // ========== RESSOURCES ==========
@@ -63,7 +63,7 @@ export default {
      * Récupérer les catégories de ressources
      */
     getResourceCategories() {
-        return $http.get('/api/v1/resources/categories/')
+        return $http.get('v1/resources/categories/')
     },
 
     /**
@@ -71,7 +71,7 @@ export default {
      * @param {Object} params - { category?, type?, search?, page? }
      */
     getResources(params = {}) {
-        return $http.get('/api/v1/resources/resources/', { params })
+        return $http.get('v1/resources/resources/', { params })
     },
 
     /**
@@ -79,7 +79,7 @@ export default {
      * @param {number} id - ID de la ressource
      */
     getResourceById(id) {
-        return $http.get(`/api/v1/resources/resources/${id}/`)
+        return $http.get(`v1/resources/resources/${id}/`)
     },
 
     /**
@@ -87,13 +87,13 @@ export default {
      * @param {Object} params - { latitude, longitude, radius, category? }
      */
     getNearbyResources(params) {
-        return $http.get('/api/v1/resources/resources/nearby/', { params })
+        return $http.get('v1/resources/resources/nearby/', { params })
     },
 
     /**
      * Récupérer les contacts d'urgence
      */
     getEmergencyContacts() {
-        return $http.get('/api/v1/resources/emergency/')
+        return $http.get('v1/resources/emergency/')
     }
 }
