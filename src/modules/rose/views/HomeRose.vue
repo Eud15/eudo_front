@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { Home, MessageCircle, BookOpen, Info } from 'lucide-vue-next'
+import { Home, MessageCircle, BookOpen, Info, Calendar, MapPin, Clock, Heart, Activity, Hospital, Phone, Mail, Globe, Users } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
 // Current route state
@@ -17,6 +17,42 @@ const navItems = [
 
 // Page transition state
 const isTransitioning = ref(false)
+
+// Événements Octobre Rose (vos événements réels)
+const events = ref([
+    {
+    id: 10,
+    name: 'BSM Group & Clinique Serena',
+    subtitle: 'Dépistage gratuit du cancer du sein',
+    description: 'Dépistage gratuit du cancer du sein à la Clinique Serena',
+    phone: '+229 68 45 80 28',
+    email: 'contact@bsmgroupe.com',
+    website: 'https://www.facebook.com/share/p/1966x4cpuU/',
+    date: '2024-10-25',
+    dateFormatted: '25 Octobre 2024',
+    time: '09h00 - 13h00',
+    location: 'Clinique Serena, Cotonou',
+    iconComponent: Hospital,
+    color: 'from-pink-500 to-rose-600',
+    tags: ['gratuit']
+  },
+  {
+    id: 9,
+    name: 'MOVE FOR PINK',
+    subtitle: 'le 25 octobre au Padel Club Cotonou',
+    description: 'Marche solidaire pour sensibiliser au dépistage du cancer du sein.',
+    phone: '+229 01 46 09 95 72',
+    website: 'https://www.instagram.com/beautyandbrainsorority/',
+    date: '2024-10-25',
+    dateFormatted: '25 Octobre 2024',
+    time: '10h00 - 18h00',
+    location: 'Padel Club Cotonou',
+    iconComponent: Activity,
+    color: 'from-pink-500 to-rose-600',
+    tags: ['payant']
+  },
+
+])
 
 // Navigate to route
 const navigateTo = (routeId: string) => {
@@ -39,6 +75,11 @@ const navigateTo = (routeId: string) => {
    router.push({ name: routeId })
   }
   
+}
+
+// Open external link
+const openLink = (url: string) => {
+  window.open(url, '_blank')
 }
 
 // Get current time for status bar
@@ -80,9 +121,6 @@ setInterval(() => {
               <div class="text-center mb-8">
                 <div class="w-70 h-70  flex items-center justify-center ">
                     <img src="../../../assets/images/rose/can.svg" alt="">
-                  <!-- <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg> -->
                 </div>
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">Rose Assistant</h1>
                 <p class="text-gray-600">Votre compagnon pour la sensibilisation au cancer du sein</p>
@@ -104,7 +142,7 @@ setInterval(() => {
               </div>
 
               <!-- Quick Actions -->
-              <div class="space-y-4">
+              <div class="space-y-4 mb-8">
                 <h3 class="text-lg font-semibold text-gray-900">Actions Rapides</h3>
                 
                 <button
@@ -134,6 +172,118 @@ setInterval(() => {
                 </button>
               </div>
 
+              <!-- Événements Octobre Rose Section -->
+              <div class="mb-8">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <Calendar class="w-5 h-5 text-pink-600" />
+                    Événements Octobre Rose
+                  </h3>
+                  <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-medium">
+                    {{ events.length }} événements
+                  </span>
+                </div>
+
+                <!-- Events Cards -->
+                <div class="space-y-4">
+                  <div
+                    v-for="(event, index) in events"
+                    :key="event.id"
+                    class="group bg-white border-2 border-pink-100 rounded-2xl overflow-hidden hover:border-pink-300 hover:shadow-xl transition-all duration-300 active:scale-98"
+                  >
+                    <!-- Event Header with Gradient -->
+                    <div :class="`bg-gradient-to-r ${event.color} p-5 text-white`">
+                      <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                          <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                            <component :is="event.iconComponent" class="w-6 h-6" />
+                          </div>
+                          <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                              <span
+                                v-for="tag in event.tags"
+                                :key="tag"
+                                :class="tag === 'gratuit' ? 'bg-green-500/90' : 'bg-amber-500/90'"
+                                class="text-xs px-2.5 py-1 rounded-full font-semibold uppercase tracking-wide"
+                              >
+                                {{ tag }}
+                              </span>
+                            </div>
+                            <h4 class="text-lg font-bold leading-tight">{{ event.name }}</h4>
+                            <p class="text-sm opacity-90 mt-0.5">{{ event.subtitle }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Event Details -->
+                    <div class="p-5 space-y-4">
+                      <p class="text-sm text-gray-600 leading-relaxed">
+                        {{ event.description }}
+                      </p>
+
+                      <!-- Info Grid -->
+                      <div class="bg-pink-50/50 rounded-xl p-4 space-y-2.5">
+                        <div class="flex items-center gap-3 text-sm">
+                          <Calendar class="w-4 h-4 text-pink-600 flex-shrink-0" />
+                          <span class="font-medium text-gray-900">{{ event.dateFormatted }}</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm">
+                          <Clock class="w-4 h-4 text-pink-600 flex-shrink-0" />
+                          <span class="text-gray-700">{{ event.time }}</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm">
+                          <MapPin class="w-4 h-4 text-pink-600 flex-shrink-0" />
+                          <span class="text-gray-700">{{ event.location }}</span>
+                        </div>
+                      </div>
+
+                      <!-- Contact Information -->
+                      <div class="space-y-2">
+                        <div v-if="event.phone" class="flex items-center gap-3 text-sm">
+                          <Phone class="w-4 h-4 text-gray-400 flex-shrink-0" />
+                          <a :href="`tel:${event.phone}`" class="text-pink-600 hover:text-pink-700 font-medium hover:underline">
+                            {{ event.phone }}
+                          </a>
+                        </div>
+                        <div v-if="event.email" class="flex items-center gap-3 text-sm">
+                          <Mail class="w-4 h-4 text-gray-400 flex-shrink-0" />
+                          <a :href="`mailto:${event.email}`" class="text-pink-600 hover:text-pink-700 font-medium hover:underline">
+                            {{ event.email }}
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="flex gap-2 pt-2">
+                        <button
+                          @click="openLink(event.website)"
+                          class="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-semibold py-3 px-4 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md"
+                        >
+                          <Globe class="w-4 h-4" />
+                          <span>Plus d'infos</span>
+                        </button>
+                        <!-- <button
+                          class="flex-1 bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold py-3 px-4 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 border-2 border-pink-200"
+                        >
+                          <Users class="w-4 h-4" />
+                          <span>Participer</span>
+                        </button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- View All Events Button -->
+                <button
+                  @click="navigateTo('ressources')"
+                  class="w-full mt-4 bg-white border-2 border-pink-200 text-pink-700 font-semibold py-3.5 px-4 rounded-xl hover:border-pink-400 hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <Calendar class="w-5 h-5" />
+                  <span>Voir tous les événements</span>
+                </button>
+              </div>
+
               <!-- Features Grid -->
               <div class="mt-8 grid grid-cols-2 gap-4">
                 <div class="bg-pink-50 rounded-xl p-4 text-center">
@@ -153,41 +303,21 @@ setInterval(() => {
                 </div>
                 <div class="bg-pink-50 rounded-xl p-4 text-center">
                   <div class="text-2xl mb-2 flex items-center justify-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
                   </div>
-                  <div class="text-sm font-medium text-gray-900">Contacts</div>
+                  <div class="text-sm font-medium text-gray-900">Ressources</div>
                 </div>
-              </div>
-            </div>
-
-            <!-- Chat Page Placeholder -->
-            <div v-else-if="currentRoute === 'chat'" class="h-full flex items-center justify-center p-6">
-              <div class="text-center">
-                <MessageCircle class="w-16 h-16 text-pink-500 mx-auto mb-4" />
-                <h2 class="text-xl font-bold text-gray-900 mb-2">Interface de Chat</h2>
-                <p class="text-gray-600">Intégrez le composant rose-chat-with-sidebar.vue ici</p>
-              </div>
-            </div>
-
-            <!-- ressources Page Placeholder -->
-            <div v-else-if="currentRoute === 'ressources'" class="h-full flex items-center justify-center p-6">
-              <div class="text-center">
-                <BookOpen class="w-16 h-16 text-pink-500 mx-auto mb-4" />
-                <h2 class="text-xl font-bold text-gray-900 mb-2">Ressources</h2>
-                <p class="text-gray-600">Intégrez le composant rose-ressources-page.vue ici</p>
               </div>
             </div>
 
             <!-- About Page -->
-            <div v-else-if="currentRoute === 'about'" class="p-6 pb-24">
+            <div v-if="currentRoute === 'about'" class="p-6 pb-24">
               <div class="text-center mb-8">
-                <div class="w-40 h-40  mx-auto mb-4 flex items-center justify-center ">
-                    <img src="../../../assets/images/rose/can&.svg" alt="">
-                  
-                    <!-- <Info class="w-10 h-10 text-white" /> -->
+                <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <Info class="w-10 h-10 text-white" />
                 </div>
-                <h1 class="text-2xl font-bold text-gray-900 mb-2">À propos de Rose Assistant</h1>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">À Propos</h1>
+                <p class="text-gray-600">Rose Assistant - Version 1.0.0</p>
               </div>
 
               <div class="space-y-6">
@@ -347,5 +477,14 @@ setInterval(() => {
 
 .content-area::-webkit-scrollbar-thumb:hover {
   background: #fda4af;
+}
+
+/* Active scale animation */
+.active\:scale-98:active {
+  transform: scale(0.98);
+}
+
+.active\:scale-95:active {
+  transform: scale(0.95);
 }
 </style>
