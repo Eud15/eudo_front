@@ -2,6 +2,7 @@ export default async function handler(req, res) {
   const backendUrl = `http://31.97.53.56:8050${req.url}`;
   
   console.log('🔄 Proxying:', req.method, backendUrl);
+  // Préparer les options de la requête
 
   try {
     
