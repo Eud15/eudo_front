@@ -24,3 +24,11 @@ export default async function handler(req, res) {
       },
       body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined,
     });
+
+    const text = await response.text();
+    res.status(response.status).send(text);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    res.status(500).json({ error: 'Proxy request failed' });
+  }
+}
