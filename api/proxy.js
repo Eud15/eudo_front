@@ -14,7 +14,11 @@ export default async function handler(req, res) {
 
   try {
     // Filtrer certains headers incompatibles
-    const { host, connection, 'content-length': _, ...safeHeaders } = req.headers;
+    const { host, connection, 'content-length': _, 'content-type': __, ...safeHeaders } = req.headers;
+
+    // Set up timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 40000); // 10 seconds
 
     const response = await fetch(backendUrl, {
       method: req.method,
@@ -23,12 +27,19 @@ export default async function handler(req, res) {
         ...safeHeaders,
       },
       body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined,
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     const text = await response.text();
     res.status(response.status).send(text);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(500).json({ error: 'Proxy request failed' });
+    if (error.name === 'AbortError') {
+      res.status(504).json({ error: 'Gateway Timeout' });
+    } else {
+      res.status(500).json({ error: 'Proxy request failed' });
+    }
   }
 }
