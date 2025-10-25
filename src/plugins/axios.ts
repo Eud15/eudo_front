@@ -4,7 +4,7 @@ import axios from 'axios'
 // Configuration de base
 const $http = axios.create({
   baseURL: '/api/',
-  timeout: 30000,
+  
   headers: {
   
   }
