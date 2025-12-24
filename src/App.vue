@@ -1,6 +1,6 @@
 <template>
     <div
-        class="main-section antialiased relative font-poppins text-sm font-normal"
+        class="main-section antialiased relative font-aloevera text-sm font-normal"
         :class="[store.sidebar ? 'toggle-sidebar' : '', store.menu, store.layout, store.rtlClass]"
     >
         <component v-bind:is="mainLayout"></component>
@@ -20,7 +20,7 @@
 
     // meta
     // useMeta({ title: 'WTM Abomey-Calavi' });
-    useMeta({ title: 'Rose Bot' });
+    useMeta({ title: 'Kangu' });
 
     const mainLayout = computed(() => {
         return store.mainLayout === 'auth' ? authLayout : appLayout;

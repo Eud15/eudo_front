@@ -1,11 +1,15 @@
-import { createI18n } from 'vue-i18n';
-import messages from '@intlify/vite-plugin-vue-i18n/messages';
+import { createI18n } from "vue-i18n";
+import en from "./locales/en.json";
+import fr from "./locales/fr.json";
+
+const messages = {
+  en,
+  fr,
+};
 
 export default createI18n({
-    legacy: false,
-    allowComposition: true,
-    locale: 'en',
-    globalInjection: true,
-    fallbackLocale: 'en',
-    messages,
+  legacy: true,  // ← Changez ici de false à true
+  locale: "fr",
+  fallbackLocale: "en",
+  messages,
 });

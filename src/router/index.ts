@@ -24,7 +24,13 @@ import RoseAbout from '@/modules/rose/views/Apropos.vue';
 import RoseChat from '@/modules/rose/views/Chat.vue';
 import RoseEvaluation from '@/modules/rose/views/Evaluation.vue';
 import RoseRessources from '@/modules/rose/views/Ressourses.vue';
+import AgentHome from '@/modules/agent/views/Dashboard.vue';
+import AgentCatalogue from '@/modules/agent/views/Catalogue.vue';
+import AgentChat from '@/modules/agent/views/Chatbot.vue';
+import Doha from '@/modules/agent/views/Doha.vue';
+import HomeGdg from '@/modules/gdg/Home.vue';
 
+import Assurance from '@/modules/assurance/Home.vue';
 const routes: RouteRecordRaw[] = [
 
 
@@ -32,28 +38,39 @@ const routes: RouteRecordRaw[] = [
     // prompt
     { path: '/prompt', name: 'prompt', component: Prompt, meta: { layout: 'auth' } },
     { path: '/prompt/list', name: 'prompt-list', component: PromptList, meta: { layout: 'auth' } },
-    { path: '/prompt/detail', name: 'prompt-detail', component: PromptDetail, meta: { layout: 'auth' } },
+    { path: '/prompt/detail/:id', name: 'prompt-detail', component: PromptDetail, meta: { layout: 'auth' } },
     { path: '/prompt/create', name: 'prompt-create', component: PromptCreate, meta: { layout: 'auth' } },
     { path: '/prompt/profile', name: 'prompt-profile', component: ProfileView, meta: { layout: 'auth' } },
     { path: '/prompt/leaderboard', name: 'prompt-leaderboard', component: LeaderBoard, meta: { layout: 'auth' } },
-    { path: '/prompt/admin', name: 'prompt-admin', component: Admin, meta: { layout: 'auth' } },
-    { path: '/prompt/validation', name: 'prompt-validation', component: Validation, meta: { layout: 'auth' } },
-    { path: '/prompt/users', name: 'prompt-users', component: Users, meta: { layout: 'auth' } },
-    { path: '/prompt/category', name: 'prompt-category', component: Category, meta: { layout: 'auth' } },
-    { path: '/prompt/statistic', name: 'prompt-statistic', component: Statistic, meta: { layout: 'auth' } },
-    { path: '/prompt/favoris', name: 'prompt-favoris', component: Favoris, meta: { layout: 'auth' } },
+    { path: '/prompt/admin', name: 'admin', component: Admin, meta: { layout: 'auth' } },
+    { path: '/prompt/validation', name: 'validation', component: Validation, meta: { layout: 'auth' } },
+    { path: '/prompt/users', name: 'users', component: Users, meta: { layout: 'auth' } },
+    { path: '/prompt/category', name: 'categories', component: Category, meta: { layout: 'auth' } },
+    { path: '/prompt/statistic', name: 'stats', component: Statistic, meta: { layout: 'auth' } },
+    { path: '/prompt/favoris', name: 'favoris', component: Favoris, meta: { layout: 'auth' } },
 
     // settings
     { path: '/prompt/settings', name: 'settings', component: Settings, meta: { layout: 'auth' } },
     { path: '/prompt/login', name: 'login', component: PromptLogin, meta: { layout: 'auth' } },
 
     // rose
-    { path: '/', name: 'rose', component: HomeRose, meta: { layout: 'auth' } },
+    { path: '/rose', name: 'rose', component: HomeRose, meta: { layout: 'auth' } },
     { path: '/rose/about', name: 'aboutRose', component: RoseAbout, meta: { layout: 'auth' } },
     { path: '/rose/chat', name: 'chat', component: RoseChat, meta: { layout: 'auth' } },
     { path: '/rose/evaluation', name: 'evaluation', component: RoseEvaluation, meta: { layout: 'auth' } },
     { path: '/rose/ressources', name: 'ressources', component: RoseRessources, meta: { layout: 'auth' } },
 
+    // assurance
+    { path: '/', name: 'assurance', component: Assurance, meta: { layout: 'auth' } },
+
+    // agent
+    { path: '/agent', name: 'agent', component: AgentHome, meta: { layout: 'auth' } },
+    { path: '/agent/catalogue', name: 'agent-catalogue', component: AgentCatalogue, meta: { layout: 'auth' } },
+    { path: '/agent/chat', name: 'agent-chat', component: AgentChat, meta: { layout: 'auth' } },
+    { path: '/doha', name: 'doha', component: Doha, meta: { layout: 'auth' } },
+
+    // gdg
+    { path: '/gdg', name: 'gdg', component: HomeGdg, meta: { layout: 'auth' } },
 
  
 

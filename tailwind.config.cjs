@@ -55,7 +55,9 @@ module.exports = {
                 },
             },
             fontFamily: {
-                poppins: ['Poppins', 'sans-serif'],
+                'glitz': ['Glitz', 'system-ui', '-apple-system', 'sans-serif'],
+                'aloevera': ['Aloevera Display', 'Georgia', 'serif'],
+                'poppins': ['Poppins', 'sans-serif'], // Garde l'ancienne police comme option
             },
             spacing: {
                 4.5: '18px',

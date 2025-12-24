@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
 
+
 const app = createApp(App);
 
 // pinia store
@@ -31,8 +32,11 @@ appSetting.init();
 import i18n from '@/i18n';
 app.use(i18n);
 
+
 // popper
 import Popper from 'vue3-popper';
 app.component('Popper', Popper);
+
+
 
 app.mount('#app');

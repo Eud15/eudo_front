@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defineStore } from 'pinia';
 import i18n from '@/i18n';
 import appSetting from '@/app-setting';
